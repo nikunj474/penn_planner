@@ -1,40 +1,86 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Penn Planner
+
+An AI-powered planning tool for Wharton MBA students that centralizes academic and recruiting deadlines into a single prioritized to-do list.
+
+## What it does
+
+Wharton students juggle coursework deadlines from **Canvas** and recruiting timelines from **CareerPath** across completely separate platforms — leading to "deadline stacking" where multiple high-stakes commitments converge undetected.
+
+Penn Planner solves this by:
+
+- **Syncing** deadlines from Canvas (assignments, quizzes, exams) and Wharton CareerPath (interviews, applications, case prep) into one place
+- **Ranking tasks** using an AI priority engine that weighs deadline urgency, task type (exam > interview > assignment), and competing commitments
+- **Recommending work time** for each task (e.g., "Case prep – 45 min")
+- **Alerting you** when 3+ deadlines are converging in the next 48 hours
+- **Generating a daily AI briefing** powered by Claude that tells you exactly what to focus on
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: SQLite via Prisma
+- **AI**: Anthropic Claude (`claude-sonnet-4-6`) for daily briefings
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up environment variables
+
+Create a `.env.local` file in the root:
+
+```env
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+DATABASE_URL="file:./dev.db"
+```
+
+### 3. Set up the database
+
+```bash
+npx prisma migrate dev
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 5. Sync tasks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Click **"Sync Canvas & CareerPath"** on the dashboard to load mock tasks, then click **"Get Briefing"** for your AI-powered daily summary.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── page.tsx                  # Main dashboard
+└── api/
+    ├── sync/                 # POST: sync Canvas & CareerPath tasks
+    ├── tasks/                # GET/POST tasks
+    ├── tasks/[id]/           # PATCH/DELETE individual task
+    ├── nudges/               # GET: deadline stacking alerts
+    └── summary/              # GET: Claude AI daily briefing
+lib/
+├── db.ts                     # Prisma client
+├── mock-data.ts              # Mock Canvas + CareerPath data
+└── priority-engine.ts        # Scoring logic + Claude integration
+components/
+├── TaskCard.tsx              # Task card with Start / Done actions
+└── AddTaskModal.tsx          # Manual task entry form
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Team — Group 3
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# penn_planner
->>>>>>> ea58fd97eac43f862ff8c0e0befad5c554be854d
+| Track | PM | Engineer |
+|---|---|---|
+| Data Integration (Canvas & CareerPath Sync) | Nyla | Alec |
+| Priority & Time Recommendation Engine | Travon | Nikunj |
+| Student Dashboard & To-Do Experience | Nikunj | Nyla |
+| Insights, Nudges & Product Evaluation | Alec | Travon |
