@@ -76,11 +76,3 @@ components/
 └── AddTaskModal.tsx          # Manual task entry form
 ```
 
-## Team — Group 3
-
-| Track | PM | Engineer |
-|---|---|---|
-| Data Integration (Canvas & CareerPath Sync) | Nyla | Alec |
-| Priority & Time Recommendation Engine | Travon | Nikunj |
-| Student Dashboard & To-Do Experience | Nikunj | Nyla |
-| Insights, Nudges & Product Evaluation | Alec | Travon |
